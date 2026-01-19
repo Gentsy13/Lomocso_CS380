@@ -30,6 +30,20 @@ class Scanner {
         return current >= source.length();
     }
 
+    private char advance() {
+        return source.charAt(current++); // java post-increment
+    }
+
+    private void addToken(TokenType type) {
+        addToken(type, null);
+    }
+
+    private void addToken(TokenType type, Object literal) {
+        String text = source.substring(start, current);
+        tokens.add(new Token(type, text, literal, line));
+    }
+
+
     private void scanToken() {
         char c = advance();
         switch (c) {
